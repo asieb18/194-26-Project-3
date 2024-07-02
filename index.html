@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>CS 194-26 Project 3</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Kalam&family=Permanent+Marker&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Title Information-->
+	<div id="header">
+        <center>
+            <div id="title"><h1>CS 194-26: Image Manipulation and Computational Photography (Fall 2022)</h1></div>
+            <div class="title2"><h2>Project 3: <i>Face Morphing</i></h2></div>
+            <br>
+        </center>
+    </div>    
+
+    <!--Overview-->
+
+    <!--PART 1: DEFINING CORRESPONDENCES-->
+    <h2>Part 1: Defining Correspondences</h2>
+    <p>The first step of this project is to define pairs of corresponding points on the two images that we plan to morph.
+        In this example, I chose to morph a picture of me and Jungkook from BTS.
+        I labeled 61 points on each image by manually selecting pairs of points in the same order that defined distinct features such as eyes/mouth/nose.
+        Next, I computed a Delauney triangulation of the <i>averages</i> of the points in order to create an average shape that will be used in the next stage of morphing.
+    </p>
+
+    <div class="row">
+        <div class="column4">
+            <img src="assets/images/me.jpg" width="325"/>
+            <figcaption class="fig4">Self Original</figcaption>
+        </div>
+
+        <div class="column4">
+            <img src="assets/images/ali_tri.png" width="325"/>
+            <figcaption class="fig4">Self Labeled Points</figcaption>
+
+            <img src="assets/images/ali_avg.png" width="325"/>
+            <figcaption class="fig4">Self Average Triangulation</figcaption>
+        </div>
+
+        <div class="column4">
+            <img src="assets/images/jk_tri.png" width="325"/>
+            <figcaption class="fig4">Jungkook Labeled Points</figcaption>
+
+            <img src="assets/images/jk_avg.png" width="325"/>
+            <figcaption class="fig4">Jungkook Average Triangulation</figcaption>
+        </div>
+
+        <div class="column4">
+            <img src="assets/images/jk.jpg" width="325"/>
+            <figcaption class="fig4">Jungkook Original</figcaption>
+        </div>
+    </div>
+
+    <!--Part 2. Computing the "Mid-way Face"-->
+    <h2>Part 2: Computing the "Mid-way Face</h2>
+    <p>In this part, I computed the mid-way face representing the average between the two faces. 
+        Using the triangulation calculated in the previous part, I warped both original images to this shape and averaged the colors together.
+        I completed this computing an affine warp for each triangle and implementing an inverse warp of every pixel.
+        The result is shown below:
+    </p>
+
+    <div class="row">
+        <div class="column">
+            <img src="assets/images/me.jpg" width="325"/>
+            <figcaption class="fig3">Self Original</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/midway.jpg" width="325"/>
+            <figcaption class="fig3">Mid-Way Image</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/jk.jpg" width="325"/>
+            <figcaption class="fig3">Jungkook Original</figcaption>
+        </div>
+    </div>
+
+    <!--Part 3. The Morph Sequence-->
+    <h2>Part 3: The Morph Sequence</h2>
+    <p>The results from this part is the final morph sequence of the two faces outputted in an animated gif.
+        This was achieved by producing a total of 46 frames beginning with the original and ending with the second face.
+        Each frame was shown for 55 milliseconds, with a 80ms pause for the first and last frames.
+    </p>
+
+    <center>
+        <p>(NOTE: If gif fails to load, the sequence can also be viewed in the following Youtube clip: <a href='https://youtu.be/lAtRtyW-hU8'>https://youtu.be/lAtRtyW-hU8</a>)</p>
+    </center>
+    <div class="row">
+        <div class="column">
+            <img src="assets/images/me.jpg" width="325"/>
+            <figcaption class="fig3">Self Original</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/jk.jpg" width="325"/>
+            <figcaption class="fig3">Jungkook Original</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/morphjk.gif" width="325"/>
+            <figcaption class="fig3">Morph Animation</figcaption>
+        </div>
+    </div>
+
+    <center><p>I repeated the same process on another set of images, merging myself with Na Hee Do from the K-Drama Twenty-Five Twenty-One.</p></center>
+
+    <div class="row">
+        <div class="column">
+            <img src="assets/images/hee.jpg" width="325"/>
+            <figcaption class="fig3">Na Hee Do Original</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/mee.jpg" width="325"/>
+            <figcaption class="fig3">Self Original</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/morphee.gif" width="325"/>
+            <figcaption class="fig3">Morph Animation</figcaption>
+        </div>
+    </div>
+
+        <!--BELLS AND WHISTLES-->
+        <h2>Bells And Whistles</h2>
+        <center>
+        <p>For bells and whistles, I created a morph sequence of my face at different ages using the following three images:</p>
+        <div class="row">
+            <div class="column">
+                <img src="assets/images/age0.jpg" width="325"/>
+            </div>
+    
+            <div class="column">
+                <img src="assets/images/age1.jpg" width="325"/>
+            </div>
+    
+            <div class="column">
+                <img src="assets/images/age3.jpg" width="325"/>
+            </div>
+        </div>
+        <p>The result is shown here: <a href='https://youtu.be/wdDraK2Mums'>https://youtu.be/wdDraK2Mums</a></p></center>
+
+    
+    <h2>Part 4: The "Mean face" of a population</h2>
+    <p>In this part, I found the mean face from the <a href="https://fei.edu.br/~cet/facedatabase.html">FEI Face Databse</a> of images.
+    I computed the average face shape of the entire population of 200 images. 
+    In addition, I calculated the average shape of two subsets of the population of 100 images each: smiling and not smiling.
+    I morphed the faces from the dataset to the average faces in order to produce the average mean face of the population. The results are displayed below:
+    </p>
+
+    <div class="row">
+        <div class="column">
+            <img src="assets/images/mean_face.jpg" width="325"/>
+            <figcaption class="fig3">Entire Population Mean-Face</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/mean_smile.jpg" width="325"/>
+            <figcaption class="fig3">Smiling Mean-Face</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/mean_regular.jpg" width="325"/>
+            <figcaption class="fig3">Non-Smiling Mean-Face</figcaption>
+        </div>
+    </div>
+
+    <center>
+
+        <h4>Warping with Average Shapes</h4>
+        <p>Here are some examples of faces from the dataset morphed into the average shape.</p>
+        <div class="row">
+            <div class="column4">
+                <img src="assets/images/random1.jpg" width="325"/>
+            </div>
+    
+            <div class="column4">
+                <img src="assets/images/random2.jpg" width="325"/>
+            </div>
+    
+            <div class="column4">
+                <img src="assets/images/random3.jpg" width="325"/>
+            </div>
+
+            <div class="column4">
+                <img src="assets/images/random4.jpg" width="325"/>
+            </div>
+        </div>
+
+    <p>Next, I morphed my face by warping it into the average shape I calculated from the population.
+        I also morphed the average mean face into the geometry of my face.
+    </p>
+    <div class="row">
+        <div class="column">
+            <img src="assets/images/mine_avg.jpg" width="325"/>
+            <figcaption>My face warped to Average Shape</figcaption>
+        </div>
+
+        <div class="column">
+            <img src="assets/images/avg_mine.jpg" width="325"/>
+            <figcaption>Mean-Face warped to my face</figcaption>
+        </div>
+
+    </div>
+</center>
+
+    <h2>Part 5: Caricatures: Extrapolating from the mean</h2>
+    <center>
+        <p>lastly, I created a caricature of my face by extrapolating from the population mean.</p>
+        <div class="row">
+            <div class="column">
+                <img src="assets/images/caricature5.jpg" width="325"/>
+                <figcaption>Alpha = 0.6</figcaption>
+            </div>
+        </div>
+    </center>
+</body>
+</html>
