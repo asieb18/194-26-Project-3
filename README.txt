@@ -1,8 +1,3 @@
-Alison Siebert
-3035808268
-alisonsiebert@berkeley.edu
-url: https://inst.eecs.berkeley.edu/~cs194-26/fa22/upload/files/proj3/cs194-26-agt/
-
 main.py
 - This python file contains all of the methods and logic to run the project.
 - It loads in two images to be morphed (im1 and im2), and gets and saves pairs of points (user-manually). If this step has already been done, it instead loads the saved files containing points.
